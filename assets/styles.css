@@ -1,1 +1,46 @@
-/* Styles will be added later */
+/* ==========================================================
+   GENERAL PAGE STYLING
+   Base typography and color setup for consistent appearance.
+========================================================== */
+
+body {
+  margin: 0; /* Remove default browser spacing */
+  font-family: "Segoe UI", Tahoma, sans-serif; /* Clean modern font */
+  background-color: #f4f6f8; /* Light neutral background */
+  color: #333; /* Standard readable text color */
+  line-height: 1.6; /* Comfortable text spacing */
+  font-size: 17px; /* Slightly larger for readability */
+}
+
+/* ==========================================================
+   DASHBOARD LAYOUT
+   Two-column structure: sidebar + main content area.
+========================================================== */
+.dashboard {
+  display: flex; /* Horizontal layout */
+  min-height: 100vh; /* Fill entire viewport height */
+}
+
+/* Sidebar setup */
+.sidebar {
+  width: 300px; /* Fixed width column */
+  background-color: #1e2a38; /* Dark contrast theme */
+  color: #fff; /* White text for readability */
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack child elements */
+  gap: 20px; /* Space between sections */
+}
+
+/* Sidebar title */
+.sidebar h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+/* Sidebar clock display */
+.time {
+  text-align: center;
+  color: #ddd;
+  font-weight: 500;
+}
