@@ -44,3 +44,50 @@ body {
   color: #ddd;
   font-weight: 500;
 }
+
+/* Search label styling */
+.search-area label {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* ==========================================================
+   FORM CONTROLS (Inputs & Buttons)
+========================================================== */
+input,
+button {
+  width: 100%; /* Full width for clean alignment */
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box; /* Include padding in total width */
+  margin: 10px 0;
+}
+
+/* Button base */
+button {
+  background-color: #0078d7;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Button hover feedback */
+button:hover {
+  background-color: #005fa3;
+}
+
+/* ==========================================================
+   ERROR MESSAGE BOX
+========================================================== */
+.error {
+  color: #ff7b7b;
+  background: #3a2f2f;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: center;
+}

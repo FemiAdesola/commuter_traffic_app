@@ -24,6 +24,35 @@
            Handles station search and status display.
       =============================== -->
       <aside class="sidebar">
+        <h2>Live Train Dashboard</h2>
+
+        <!-- Current system time (auto-updated by JS) -->
+        <p id="currentTime" class="time"></p>
+
+        <!-- Station search tools -->
+        <div class="search-area">
+          <!-- Input-based search -->
+          <label for="stationInput">Search by Station:</label>
+          <input
+            type="text"
+            id="stationInput"
+            placeholder="Enter station name (e.g., Helsinki)"
+          />
+
+          <!-- Dropdown-based station selection -->
+          <label>Or Select Station:</label>
+          <div class="custom-select" id="customSelect">
+            <div class="selected">-- Select a station --</div>
+            <!-- Dropdown options inserted dynamically via JS -->
+            <div class="options hidden" id="stationOptions"></div>
+          </div>
+
+          <!-- Triggers station lookup -->
+          <button id="searchBtn">Search</button>
+        </div>
+
+        <!-- Displays error feedback (hidden by default) -->
+        <p id="error" class="error hidden"></p>
       </aside>
 
       <!-- ===============================
