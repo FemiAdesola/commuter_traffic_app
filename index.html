@@ -60,6 +60,23 @@
            Displays train data and status cards.
       =============================== -->
       <main class="main-content">
+        <h1>Train Live Timetables Across Finland</h1>
+
+        <!-- Time window of displayed results -->
+        <p id="timeRange" class="time-range"></p>
+
+        <!-- Loading indicator while fetching data -->
+        <div id="loading" class="hidden">Loading train data...</div>
+
+        <!-- Past train section (toggle visibility) -->
+        <div id="past-section" class="hidden">
+          <button id="togglePastBtn" class="toggle-btn">Show Past Trains</button>
+          <!-- Cards for departed trains generated dynamically -->
+          <div id="pastTrains" class="hidden"></div>
+        </div>
+
+        <!-- Live train results injected here -->
+        <div id="results"></div>
       </main>
     </div>
 

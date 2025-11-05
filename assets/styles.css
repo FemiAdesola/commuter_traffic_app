@@ -91,3 +91,193 @@ button:hover {
   border-radius: 6px;
   text-align: center;
 }
+
+/* ==========================================================
+   MAIN CONTENT AREA
+   Holds results and train listings.
+========================================================== */
+.main-content {
+  flex: 1; /* Expand to fill remaining width */
+  background-color: #fff;
+  padding: 30px;
+  overflow-y: auto; /* Allow scroll if needed */
+}
+
+/* Section title */
+.main-content h1 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+}
+
+/* Current time range info */
+.time-range {
+  text-align: center;
+  color: #0078d7;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+/* ==========================================================
+   TRAIN INFORMATION CARDS
+========================================================== */
+.train-card {
+  background: #fafafa;
+  border-left: 4px solid #0078d7; /* Accent line */
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+}
+
+/* Train name/emphasis text */
+.train-card strong {
+  color: #333;
+}
+
+/* Train status indicators */
+.train-card .on-time {
+  color: green;
+  font-weight: bold;
+}
+.train-card .delayed {
+  color: red;
+  font-weight: bold;
+}
+
+/* Past trains (already departed) */
+.past-train {
+  background-color: #ffe6e6;
+  border-left: 4px solid #d9534f;
+}
+
+/* ==========================================================
+   CUSTOM DROPDOWN COMPONENT
+   Replaces default select with styled version.
+========================================================== */
+.custom-select {
+  position: relative;
+  width: 100%;
+  font-size: 1rem;
+}
+
+/* Dropdown display field */
+.custom-select .selected {
+  padding: 12px 14px;
+  background-color: #fff;
+  color: #333;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Hover visual feedback */
+.custom-select .selected:hover {
+  background-color: #f7f7f7;
+  border-color: #0078d7;
+}
+
+/* Dropdown list container */
+.custom-select .options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  color: #333;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ddd;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 50;
+  animation: fadeIn 0.15s ease-in-out;
+}
+
+/* ==========================================================
+   CUSTOM SCROLLBAR
+========================================================== */
+.custom-select .options::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-select .options::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+.custom-select .options::-webkit-scrollbar-thumb:hover {
+  background-color: #999;
+}
+
+/* ==========================================================
+   DROPDOWN OPTION ITEMS
+========================================================== */
+.custom-select .option {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Hover highlight */
+.custom-select .option:hover {
+  background-color: #0078d7;
+  color: #fff;
+}
+
+/* Remove divider on last item */
+.custom-select .option:last-child {
+  border-bottom: none;
+}
+
+/* Utility: hide element */
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================
+   ANIMATION EFFECTS
+========================================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE BEHAVIOR (Mobile)
+========================================================== */
+@media (max-width: 800px) {
+  .dashboard {
+    flex-direction: column; /* Stack vertically */
+  }
+
+  .sidebar {
+    width: 100%; /* Full width sidebar */
+  }
+
+  .main-content {
+    padding: 20px; /* Tighter layout */
+  }
+
+  /* Larger touch-friendly controls */
+  .custom-select .selected,
+  .custom-select .option,
+  input,
+  button {
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+}
+
