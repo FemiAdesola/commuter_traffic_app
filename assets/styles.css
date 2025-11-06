@@ -6,8 +6,8 @@
 body {
   margin: 0; /* Remove default browser spacing */
   font-family: "Segoe UI", Tahoma, sans-serif; /* Clean modern font */
-  background-color: #f4f6f8; /* Light neutral background */
-  color: #333; /* Standard readable text color */
+  background-color: #0e0e12; /* Deep dark background */
+  color: #e0e0e5; /* Soft light gray for readability */
   line-height: 1.6; /* Comfortable text spacing */
   font-size: 17px; /* Slightly larger for readability */
 }
@@ -24,30 +24,36 @@ body {
 /* Sidebar setup */
 .sidebar {
   width: 300px; /* Fixed width column */
-  background-color: #1e2a38; /* Dark contrast theme */
-  color: #fff; /* White text for readability */
+  background: linear-gradient(
+    180deg,
+    #151520,
+    #0e0e12
+  ); /* Subtle gradient for depth */
+  color: #f4f4f8; /* Bright white text for readability */
   padding: 20px;
   display: flex;
   flex-direction: column; /* Stack child elements */
   gap: 20px; /* Space between sections */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5); /* Soft edge shadow */
 }
 
 /* Sidebar title */
 .sidebar h2 {
   margin: 0;
   font-size: 1.4rem;
+  color: #b882ff; /* Purple accent */
 }
 
 /* Sidebar clock display */
 .time {
   text-align: center;
-  color: #ddd;
+  color: #9a9aa5;
   font-weight: 500;
 }
 
 /* Search label styling */
 .search-area label {
-  color: #fff;
+  color: #f4f4f8;
   font-weight: 600;
   margin-bottom: 5px;
   display: block;
@@ -65,6 +71,8 @@ button {
   border: none;
   box-sizing: border-box; /* Include padding in total width */
   margin: 10px 0;
+  background-color: #1b1b24; /* Dark input background */
+  color: #e0e0e5; /* Text readable on dark */
 }
 
 /* selecting specific inputs in sidebar to adjust width */
@@ -75,27 +83,37 @@ button {
 
 /* Button base */
 button {
-  background-color: #0078d7;
+  background: linear-gradient(
+    90deg,
+    #a971ff,
+    #ffba49
+  ); /* Purple to gold gradient */
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(169, 113, 255, 0.4); /* Subtle glow */
+  border: 1px solid rgba(169, 113, 255, 0.5);
 }
 
 /* Button hover feedback */
 button:hover {
-  background-color: #005fa3;
+  background: linear-gradient(90deg, #ffba49, #a971ff);
+  box-shadow: 0 0 3px rgba(255, 186, 73, 0.7), 0 0 5px rgba(169, 113, 255, 0.6);
+  transform: translateY(-2px);
 }
 
 /* ==========================================================
    ERROR MESSAGE BOX
 ========================================================== */
 .error {
-  color: #ff7b7b;
-  background: #3a2f2f;
+  color: #ff6b6b;
+  background: #2a1515;
   padding: 8px;
   border-radius: 6px;
   text-align: center;
+  border: 1px solid #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
 }
 
 /* ==========================================================
@@ -104,7 +122,7 @@ button:hover {
 ========================================================== */
 .main-content {
   flex: 1; /* Expand to fill remaining width */
-  background-color: #fff;
+  background-color: #13131a; /* Deep dark gray background */
   padding: 30px;
   overflow-y: auto; /* Allow scroll if needed */
 }
@@ -112,50 +130,86 @@ button:hover {
 /* Section title */
 .main-content h1 {
   text-align: center;
-  color: #333;
+  color: #b882ff; /* Vibrant purple highlight */
   font-size: 1.8rem;
 }
 
 /* Current time range info */
 .time-range {
   text-align: center;
-  color: #0078d7;
+  color: #ffba49; /* Gold accent for active states */
   font-weight: 500;
   margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 186, 73, 0.6);
 }
 
 /* ==========================================================
    TRAIN INFORMATION CARDS
 ========================================================== */
 .train-card {
-  background: #fafafa;
-  border-left: 4px solid #0078d7; /* Accent line */
+  background: #1b1b24;
+  border-left: 4px solid #b882ff; /* Purple accent line */
   margin-bottom: 12px;
   padding: 14px;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(184, 130, 255, 0.2); /* Glow edge */
   font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  position: relative;
+}
+
+/* Animated glow border */
+.train-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+
+  /* Gradient border effect */
+  background: linear-gradient(90deg, #b882ff, #ffba49, #b882ff);
+  background-size: 200% 200%;
+  animation: neonGlow 4s linear infinite;
+
+  /* for creating hollow border effect without -webkit-mask */
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude; /* Subtract inner area from border */
+
+  /* to ensure that background doesn’t overlay card content */
+  background-clip: content-box, border-box;
+  pointer-events: none; /* Prevent interfering with interactions */
+}
+
+/* Hover lift + enhanced glow */
+.train-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(255, 186, 73, 0.5),
+    0 0 12px rgba(184, 130, 255, 0.4);
+  border-left-color: #ffba49;
 }
 
 /* Train name/emphasis text */
 .train-card strong {
-  color: #333;
+  color: #ffffff;
 }
 
 /* Train status indicators */
 .train-card .on-time {
-  color: green;
+  color: #8aff8a; /* Soft neon green */
   font-weight: bold;
+  text-shadow: 0 0 8px rgba(138, 255, 138, 0.6);
 }
 .train-card .delayed {
-  color: red;
+  color: #ff6b6b; /* Bright red */
   font-weight: bold;
+  text-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
 }
 
 /* Past trains (already departed) */
 .past-train {
-  background-color: #ffe6e6;
-  border-left: 4px solid #d9534f;
+  background-color: #5c3535;
+  border-left: 4px solid #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
 }
 
 /* ==========================================================
@@ -171,21 +225,22 @@ button:hover {
 /* Dropdown display field */
 .custom-select .selected {
   padding: 12px 14px;
-  background-color: #fff;
-  color: #333;
+  background-color: #1b1b24;
+  color: #e0e0e5;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #2d2d36;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.3s;
 }
 
 /* Hover visual feedback */
 .custom-select .selected:hover {
-  background-color: #f7f7f7;
-  border-color: #0078d7;
+  background-color: #252531;
+  border-color: #b882ff;
+  box-shadow: 0 0 10px rgba(184, 130, 255, 0.5);
 }
 
 /* Dropdown list container */
@@ -194,11 +249,11 @@ button:hover {
   top: calc(100% + 4px);
   left: 0;
   width: 100%;
-  background: #ffffff;
-  color: #333;
+  background: #1b1b24;
+  color: #e0e0e5;
   border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(184, 130, 255, 0.3);
+  border: 1px solid #2d2d36;
   max-height: 250px;
   overflow-y: auto;
   z-index: 50;
@@ -212,11 +267,11 @@ button:hover {
   width: 8px;
 }
 .custom-select .options::-webkit-scrollbar-thumb {
-  background-color: #ccc;
+  background-color: #3c3c46;
   border-radius: 4px;
 }
 .custom-select .options::-webkit-scrollbar-thumb:hover {
-  background-color: #999;
+  background-color: #b882ff;
 }
 
 /* ==========================================================
@@ -224,17 +279,18 @@ button:hover {
 ========================================================== */
 .custom-select .option {
   padding: 12px 14px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #2d2d36;
   cursor: pointer;
-  background-color: #fff;
-  color: #333;
-  transition: background-color 0.2s, color 0.2s;
+  background-color: #1b1b24;
+  color: #e0e0e5;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.3s;
 }
 
 /* Hover highlight */
 .custom-select .option:hover {
-  background-color: #0078d7;
-  color: #fff;
+  background-color: #b882ff;
+  color: #0e0e12;
+  box-shadow: 0 0 10px rgba(184, 130, 255, 0.5);
 }
 
 /* Remove divider on last item */
@@ -258,6 +314,19 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Animated gradient for glowing borders */
+@keyframes neonGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -286,4 +355,3 @@ button:hover {
     padding: 14px;
   }
 }
-
