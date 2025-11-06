@@ -1,20 +1,8 @@
-<div align="center">
+# 🚆 Commuter Traffic App
 
-<!-- Terminal header -->
-<div style="background:#2d2d2d; border-radius:8px 8px 0 0; padding:8px 12px; text-align:left; color:#ccc; font-family:Menlo, monospace;">
-  <span style="color:#ff5f56;">●</span>
-  <span style="color:#ffbd2e;">●</span>
-  <span style="color:#27c93f;">●</span>
-  <span style="margin-left:8px;"> 🚆 Commuter Traffic App</span>
-</div>
-<!-- Terminal body -->
-<div style="background:#1e1e1d; padding:16px; color:#d1d1d1; text-align:left; font-family:Menlo, monospace; font-size:14px; border-radius:0 0 8px 8px; overflow:auto;">
-<pre>
+> This is JavaScript + API project that demonstrates skills with AJAX, the Fetch API, and DOM manipulation without relying on frameworks
 
 ## 🚆 Project Goal
-
-<p> This is JavaScript + API project that demonstrates skills with AJAX, the Fetch API, and DOM manipulation without relying on frameworks
-
 
 - Create a web app where a user can:
     - Select or search a train station (e.g., "Helsinki")
@@ -233,7 +221,3 @@ Example endpoints used:
 **API Data Source:** [Digitraffic Railway API](https://rata.digitraffic.fi)  
 
 ---
-</pre>
-</div>
-
-</div>
