@@ -1,7 +1,20 @@
-# 🚆 Commuter Traffic App
-> This is JavaScript + API project that demonstrates skills with AJAX, the Fetch API, and DOM manipulation without relying on frameworks
+<div align="center">
+
+<!-- Terminal header -->
+<div style="background:#2d2d2d; border-radius:8px 8px 0 0; padding:8px 12px; text-align:left; color:#ccc; font-family:Menlo, monospace;">
+  <span style="color:#ff5f56;">●</span>
+  <span style="color:#ffbd2e;">●</span>
+  <span style="color:#27c93f;">●</span>
+  <span style="margin-left:8px;"> 🚆 Commuter Traffic App</span>
+</div>
+<!-- Terminal body -->
+<div style="background:#1e1e1d; padding:16px; color:#d1d1d1; text-align:left; font-family:Menlo, monospace; font-size:14px; border-radius:0 0 8px 8px; overflow:auto;">
+<pre>
 
 ## 🚆 Project Goal
+
+<p> This is JavaScript + API project that demonstrates skills with AJAX, the Fetch API, and DOM manipulation without relying on frameworks
+
 
 - Create a web app where a user can:
     - Select or search a train station (e.g., "Helsinki")
@@ -11,10 +24,14 @@
 
 ---
 
+
 # 🚆 Documentation for Train Live Timetables Web App
 
 > This is dark-themed **real-time train timetable dashboard** built using **HTML**, **CSS**, and **JavaScript**.  
 It connects to the **Digitraffic Open API** to show **live arrival and departure information** for all train stations across Finland.
+
+<code style="color : greenyellow"><strong>Click to view the website link [here](https://femi-commuter-traffic-app.netlify.app/)</strong></code>
+
 
 ---
 ## Front page
@@ -84,6 +101,8 @@ It allows users to:
 1. **Clone or download** this repository:
    ```bash
    git clone https://github.com/FemiAdesola/commuter_traffic_app.git
+   or 
+   download the ZIP file and extract it.
    ```
 2. Navigate into the project folder:
    ```bash
@@ -105,6 +124,8 @@ It allows users to:
 1. Open **Terminal** and clone the repository:
    ```bash
    git clonehttps://github.com/FemiAdesola/commuter_traffic_app.git
+   or 
+   download the ZIP file and extract it.
    ```
 2. Move into the project directory:
    ```bash
@@ -202,16 +223,17 @@ Example endpoints used:
 | Delays not updating | Refresh manually (click “Search” again). |
 
 ---
-
 ## Future Enhancements
 - Add Finnish/English language switch.  
 - Deploy as PWA for mobile offline access.  
 
 ---
-
 ## Author
-
 **Developed by:** Femi Adesola\
 **API Data Source:** [Digitraffic Railway API](https://rata.digitraffic.fi)  
 
 ---
+</pre>
+</div>
+
+</div>
