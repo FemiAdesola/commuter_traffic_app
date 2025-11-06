@@ -118,8 +118,122 @@ document.addEventListener("click", (e) => {
 });
 
 // ================================
+// AUTOCOMPLETE SEARCH (Typing)
+// ================================
+stationInput.addEventListener("input", () => {
+  // Take what the user typed and make it lowercase for easier comparison.
+  const query = stationInput.value.trim().toLowerCase();
+
+  // Select all dropdown options currently visible.
+  const options = document.querySelectorAll("#stationOptions .option");
+
+  // If input is cleared, reset everything.
+  if (!query) {
+    options.forEach((opt) => (opt.style.display = "block")); // show all
+    selected.textContent = "-- Select a station --";         // reset dropdown label
+    optionsContainer.classList.add("hidden");
+    resultsDiv.innerHTML = "";
+    timeRangeDisplay.textContent = "";
+    pastSection.classList.add("hidden");
+    errorDiv.classList.add("hidden");
+    return;
+  }
+
+  // Filter dropdown options based on user input.
+  let anyMatch = false;
+  options.forEach((opt) => {
+    const match = opt.textContent.toLowerCase().includes(query);
+    opt.style.display = match ? "block" : "none";
+    if (match) anyMatch = true;
+  });
+
+  // Show dropdown if at least one match exists.
+  if (anyMatch) optionsContainer.classList.remove("hidden");
+  else optionsContainer.classList.add("hidden");
+
+  // Update dropdown label text to show closest match.
+  const found = stations.find(
+    (st) =>
+      st.stationName.toLowerCase() === query ||
+      st.stationName.toLowerCase().startsWith(query)
+  );
+  selected.textContent = found ? found.stationName : "-- Select a station --";
+});
+
+// ================================
+// SEARCH EVENT HANDLING
+// ================================
+searchBtn.addEventListener("click", handleSearch);
+
+// Pressing Enter also triggers search.
+stationInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") handleSearch();
+});
+
+// Show or hide past trains when button is clicked.
+togglePastBtn.addEventListener("click", () => {
+  showAllPast = !showAllPast; // toggle boolean
+  pastTrainsDiv.classList.toggle("hidden", !showAllPast);
+  togglePastBtn.textContent = showAllPast
+    ? "Hide Past Trains"
+    : "Show Past Trains";
+});
+
+// ================================
+// HANDLE SEARCH FUNCTION
+// ================================
+async function handleSearch() {
+  clearInterval(refreshInterval); // Stop any previous auto-refresh
+  errorDiv.classList.add("hidden"); // Hide old error messages
+
+  // Get typed text and dropdown-selected station.
+  const query = stationInput.value.trim().toLowerCase();
+  const selectedStation = selected.textContent.trim();
+
+  // If both are empty, show warning.
+  if (!query && selectedStation === "-- Select a station --") {
+    showError("⚠️ Please enter or choose a station.");
+    return;
+  }
+
+  // Find matching station object from the API data.
+  const found = stations.find((st) => {
+    const name = st.stationName.toLowerCase();
+    return (
+      name === query ||
+      name.startsWith(query) ||
+      name === selectedStation.toLowerCase()
+    );
+  });
+
+  // If no valid station was found, show an error.
+  if (!found) {
+    showError("❌ Station not found.");
+    return;
+  }
+
+  // Fetch live train data for the chosen station.
+  await fetchTrainData(found.stationShortCode, found.stationName);
+
+  // Refresh every 45 seconds to stay up-to-date.
+  refreshInterval = setInterval(
+    () => fetchTrainData(found.stationShortCode, found.stationName),
+    45000
+  );
+
+  // Close the dropdown menu.
+  optionsContainer.classList.add("hidden");
+}
+
+// ================================
 //  HELPER FUNCTIONS
 // ================================
+
+// Displays an error message in the sidebar.
+function showError(msg) {
+  errorDiv.textContent = msg;
+  errorDiv.classList.remove("hidden");
+}
 
 // Updates the live clock text in the sidebar.
 function updateClock() {
