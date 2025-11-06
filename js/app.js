@@ -130,7 +130,7 @@ stationInput.addEventListener("input", () => {
   // If input is cleared, reset everything.
   if (!query) {
     options.forEach((opt) => (opt.style.display = "block")); // show all
-    selected.textContent = "-- Select a station --";         // reset dropdown label
+    selected.textContent = "-- Select a station --"; // reset dropdown label
     optionsContainer.classList.add("hidden");
     resultsDiv.innerHTML = "";
     timeRangeDisplay.textContent = "";
@@ -226,6 +226,75 @@ async function handleSearch() {
 }
 
 // ================================
+// FETCH TRAIN DATA FROM API
+// ================================
+async function fetchTrainData(stationCode, stationName) {
+  // Clear old results and show the loading message.
+  resultsDiv.innerHTML = "";
+  loading.classList.remove("hidden");
+  errorDiv.classList.add("hidden");
+
+  try {
+    // Fetch live arrivals/departures for the selected station.
+    const response = await fetch(
+      `https://rata.digitraffic.fi/api/v1/live-trains/station/${stationCode}?arriving_trains=50&departing_trains=50&include_nonstopping=false`
+    );
+    const trains = await response.json();
+
+    // Hide loading once data arrives.
+    loading.classList.add("hidden");
+
+    // Define a 4-hour window: 2 hours before and after now.
+    const now = new Date();
+    const startTime = new Date(now.getTime() - 2 * 60 * 60 * 1000);
+    const endTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
+    // Display this time window in the UI.
+     timeRangeDisplay.textContent = `Showing trains from ${startTime.toLocaleTimeString(
+      [],
+      { hour: "2-digit", minute: "2-digit" }
+    )} – ${endTime.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}`;
+
+    // Filter trains whose schedule falls within the current 4-hour range.
+    const filtered = trains.filter((train) =>
+      train.timeTableRows.some(
+        (row) =>
+          row.stationShortCode === stationCode &&
+          new Date(row.scheduledTime) >= startTime &&
+          new Date(row.scheduledTime) <= endTime
+      )
+    );
+
+    // If no trains are found, show a message.
+    if (!filtered.length) {
+      resultsDiv.innerHTML = `<p>No trains found for ${stationName} in this time window.</p>`;
+      return;
+    }
+
+    // Add title to the results section.
+    resultsDiv.innerHTML = `<h2>Live Arrivals & Departures for ${stationName} station</h2>`;
+
+    // Sort trains chronologically by scheduled time.
+    filtered.sort((a, b) => {
+      const aRow = a.timeTableRows.find((r) => r.stationShortCode === stationCode);
+      const bRow = b.timeTableRows.find((r) => r.stationShortCode === stationCode);
+      return new Date(aRow?.scheduledTime || 0) - new Date(bRow?.scheduledTime || 0);
+    });
+
+    console.log("Filtered and sorted trains:", stationName); // to see filtered trains
+
+    
+  } catch (err) {
+    // If the API request fails, hide loading and show an error message.
+    loading.classList.add("hidden");
+    showError(`❌ Error fetching data: ${err.message}`);
+  }
+}
+
+// ================================
 //  HELPER FUNCTIONS
 // ================================
 
@@ -238,5 +307,14 @@ function showError(msg) {
 // Updates the live clock text in the sidebar.
 function updateClock() {
   const now = new Date();
-  currentTimeDisplay.textContent = `Current Time: ${now.toLocaleTimeString()}`;
+  
+    currentTimeDisplay.textContent = `Current Time: ${now.toLocaleTimeString("en-GB", {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  })}`;
 }
