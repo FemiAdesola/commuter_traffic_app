@@ -130,6 +130,11 @@ It allows users to:
    - Past trains by toggling **“Show Past Trains.”**  
 5. The app refreshes automatically every **45 seconds**.
 
+### Usage instruction in details
+> The dashboard uses AJAX (implemented with the modern fetch() API) to retrieve and update live train information from the Digitraffic Open Railway API without reloading the page. When a user selects a station, the app sends an asynchronous request to fetch the latest arrivals and departures. The script then calculates a 4-hour viewing window — two hours before and two hours after the current time and filters the train data to show only those operating within that range. This ensures the dashboard always displays up-to-date and relevant schedules.
+
+> If no trains are available during that period, a friendly message is shown instead of empty results. By handling this data asynchronously, the app maintains a smooth, uninterrupted experience for the user, dynamically updating the content in real time while preserving the overall page structure and visual flow.
+
 ---
 ## Live trains & Past trains
 | Live train | Past train|
