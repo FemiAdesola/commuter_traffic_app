@@ -199,12 +199,19 @@ button:hover {
 .train-card .on-time {
   color: #8aff8a; /* Soft neon green */
   font-weight: bold;
-  text-shadow: 0 0 8px rgba(138, 255, 138, 0.6);
+  text-shadow: 0 0 2px rgba(138, 255, 138, 0.6);
 }
 .train-card .delayed {
   color: #ff6b6b; /* Bright red */
   font-weight: bold;
-  text-shadow: 0 0 8px rgba(255, 107, 107, 0.6);
+  text-shadow: 0 0 2px rgba(255, 107, 107, 0.6);
+}
+
+.destination-link {
+  color: #1b3ed7;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, text-shadow 0.3s;
 }
 
 /* Past trains (already departed) */
