@@ -67,6 +67,12 @@ button {
   margin: 10px 0;
 }
 
+/* selecting specific inputs in sidebar to adjust width */
+#searchBtn, #customSelect, #stationInput {
+ width: 90%; /* Slightly narrower for sidebar */
+ outline: none;
+}
+
 /* Button base */
 button {
   background-color: #0078d7;

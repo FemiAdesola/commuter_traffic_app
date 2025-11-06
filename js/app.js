@@ -284,8 +284,79 @@ async function fetchTrainData(stationCode, stationName) {
       return new Date(aRow?.scheduledTime || 0) - new Date(bRow?.scheduledTime || 0);
     });
 
-    console.log("Filtered and sorted trains:", stationName); // to see filtered trains
+    console.log("Filtered and sorted trains:", stationName); // to see filtered 
+    
+     const upcomingContainer = document.createElement("div");
+    pastTrainsDiv.innerHTML = "";
 
+    // Loop through filtered trains to create a card for each one.
+    filtered.forEach((train) => {
+      const arr = train.timeTableRows.find(
+        (r) => r.stationShortCode === stationCode && r.type === "ARRIVAL"
+      );
+      const dep = train.timeTableRows.find(
+        (r) => r.stationShortCode === stationCode && r.type === "DEPARTURE"
+      );
+
+      // Extract and format arrival/departure times.
+      const arrTime = arr ? new Date(arr.scheduledTime) : null;
+      const depTime = dep ? new Date(dep.scheduledTime) : null;
+      const reference = depTime || arrTime;
+      const isPast = reference && reference < now;
+
+      const arrStr = arrTime
+        ? arrTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+        : "—";
+      const depStr = depTime
+        ? depTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+        : "—";
+
+      // Calculate delay (if any)
+      const delay = dep?.differenceInMinutes || arr?.differenceInMinutes || 0;
+      const delayClass = delay > 0 ? "delayed" : "on-time";
+      const delayText = delay > 0 ? `Delayed ${delay} min` : "On time";
+
+      // Find train’s final destination
+      const destCode = train.timeTableRows.at(-1).stationShortCode;
+      const destStation = stations.find((st) => st.stationShortCode === destCode);
+      const destinationName = destStation ? destStation.stationName : destCode;
+
+      // Generate display name for the train (e.g., "IC 45" or "HSL A").
+      const trainName = train.commuterLineID || `${train.trainType} ${train.trainNumber}`;
+      console.log("Creating card for train:", trainName); // to see each train card
+      
+      // Create visual card element
+      const card = document.createElement("div");
+      card.classList.add("train-card");
+      if (isPast) card.classList.add("past-train");
+
+      // Fill the card with train details
+      card.innerHTML = `
+        <div><strong>Train:</strong> ${trainName}${isPast ? " (Past)" : ""}</div>
+        <div>
+          <strong>Destination:</strong>
+          <a class="destination-link"
+             href="https://www.google.com/maps/search/${encodeURIComponent(destinationName)}"
+             target="_blank">${destinationName}</a><br>
+          <strong>Arrival:</strong> ${arrStr}<br>
+          <strong>Departure:</strong> ${depStr}<br>
+          <strong>Status:</strong> <span class="${delayClass}">${delayText}</span>
+        </div>
+      `;
+        console.log("Upcoming trains displayed for:", destinationName); // to see upcoming trains destinationName
+      // Place in correct section (upcoming or past)
+      if (isPast) pastTrainsDiv.appendChild(card);
+      else upcomingContainer.appendChild(card);
+    });
+
+    // Add all upcoming trains to main result area.
+    resultsDiv.appendChild(upcomingContainer);
+
+    // Show or hide the "past trains" section depending on content.
+    const hasPast = pastTrainsDiv.children.length > 0;
+    pastSection.classList.toggle("hidden", !hasPast);
+    togglePastBtn.textContent = "Show Past Trains";
+    pastTrainsDiv.classList.add("hidden");
     
   } catch (err) {
     // If the API request fails, hide loading and show an error message.
