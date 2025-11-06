@@ -237,7 +237,7 @@ async function fetchTrainData(stationCode, stationName) {
   try {
     // Fetch live arrivals/departures for the selected station.
     const response = await fetch(
-      `https://rata.digitraffic.fi/api/v1/live-trains/station/${stationCode}?arriving_trains=50&departing_trains=50&include_nonstopping=false`
+      `https://rata.digitraffic.fi/api/v1/live-trains/station/${stationCode}?arriving_trains=20&departing_trains=20&include_nonstopping=false`
     );
     const trains = await response.json();
 
