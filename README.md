@@ -58,6 +58,9 @@ It allows users to:
 ✅ **Responsive Design** — Works seamlessly on desktops, tablets, and mobile devices.  
 ✅ **Interactive UI** — Dropdown search, hover effects, and animated cards.
 
+### **Auto Refresh** — Updates data every 45 seconds automatically
+> The app refreshes train information every 45 seconds to keep the data accurate and up to date. It uses a JavaScript feature called setInterval() to repeatedly call the fetchTrainData() method for the selected station, updating arrival and departure in real time, without requiring a manual page reload. This makes checking train schedules easy and seamless.
+
 ---
 
 ## Tech Stack
