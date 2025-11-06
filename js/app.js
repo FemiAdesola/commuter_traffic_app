@@ -250,9 +250,9 @@ async function fetchTrainData(stationCode, stationName) {
     const endTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
 
     // Display this time window in the UI.
-     timeRangeDisplay.textContent = `Showing trains from ${startTime.toLocaleTimeString(
+    timeRangeDisplay.textContent = `Showing trains from: ${startTime.toLocaleTimeString(
       [],
-      { hour: "2-digit", minute: "2-digit" }
+      {month: "short", day: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" }
     )} – ${endTime.toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
@@ -279,14 +279,20 @@ async function fetchTrainData(stationCode, stationName) {
 
     // Sort trains chronologically by scheduled time.
     filtered.sort((a, b) => {
-      const aRow = a.timeTableRows.find((r) => r.stationShortCode === stationCode);
-      const bRow = b.timeTableRows.find((r) => r.stationShortCode === stationCode);
-      return new Date(aRow?.scheduledTime || 0) - new Date(bRow?.scheduledTime || 0);
+      const aRow = a.timeTableRows.find(
+        (r) => r.stationShortCode === stationCode
+      );
+      const bRow = b.timeTableRows.find(
+        (r) => r.stationShortCode === stationCode
+      );
+      return (
+        new Date(aRow?.scheduledTime || 0) - new Date(bRow?.scheduledTime || 0)
+      );
     });
 
-    console.log("Filtered and sorted trains:", stationName); // to see filtered 
-    
-     const upcomingContainer = document.createElement("div");
+    console.log("Filtered and sorted trains:", stationName); // to see filtered
+
+    const upcomingContainer = document.createElement("div");
     pastTrainsDiv.innerHTML = "";
 
     // Loop through filtered trains to create a card for each one.
@@ -318,13 +324,16 @@ async function fetchTrainData(stationCode, stationName) {
 
       // Find train’s final destination
       const destCode = train.timeTableRows.at(-1).stationShortCode;
-      const destStation = stations.find((st) => st.stationShortCode === destCode);
+      const destStation = stations.find(
+        (st) => st.stationShortCode === destCode
+      );
       const destinationName = destStation ? destStation.stationName : destCode;
 
       // Generate display name for the train (e.g., "IC 45" or "HSL A").
-      const trainName = train.commuterLineID || `${train.trainType} ${train.trainNumber}`;
+      const trainName =
+        train.commuterLineID || `${train.trainType} ${train.trainNumber}`;
       console.log("Creating card for train:", trainName); // to see each train card
-      
+
       // Create visual card element
       const card = document.createElement("div");
       card.classList.add("train-card");
@@ -332,18 +341,22 @@ async function fetchTrainData(stationCode, stationName) {
 
       // Fill the card with train details
       card.innerHTML = `
-        <div><strong>Train:</strong> ${trainName}${isPast ? " (Past)" : ""}</div>
+        <div><strong>Train:</strong> ${trainName}${
+        isPast ? " (Past)" : ""
+      }</div>
         <div>
           <strong>Destination:</strong>
           <a class="destination-link"
-             href="https://www.google.com/maps/search/${encodeURIComponent(destinationName)}"
+             href="https://www.google.com/maps/search/${encodeURIComponent(
+               destinationName
+             )}"
              target="_blank">${destinationName}</a><br>
           <strong>Arrival:</strong> ${arrStr}<br>
           <strong>Departure:</strong> ${depStr}<br>
           <strong>Status:</strong> <span class="${delayClass}">${delayText}</span>
         </div>
       `;
-        console.log("Upcoming trains displayed for:", destinationName); // to see upcoming trains destinationName
+      console.log("Upcoming trains displayed for:", destinationName); // to see upcoming trains destinationName
       // Place in correct section (upcoming or past)
       if (isPast) pastTrainsDiv.appendChild(card);
       else upcomingContainer.appendChild(card);
@@ -357,7 +370,6 @@ async function fetchTrainData(stationCode, stationName) {
     pastSection.classList.toggle("hidden", !hasPast);
     togglePastBtn.textContent = "Show Past Trains";
     pastTrainsDiv.classList.add("hidden");
-    
   } catch (err) {
     // If the API request fails, hide loading and show an error message.
     loading.classList.add("hidden");
@@ -378,14 +390,17 @@ function showError(msg) {
 // Updates the live clock text in the sidebar.
 function updateClock() {
   const now = new Date();
-  
-    currentTimeDisplay.textContent = `Current Time: ${now.toLocaleTimeString("en-GB", {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  })}`;
+
+  currentTimeDisplay.textContent = `Current Time: ${now.toLocaleTimeString(
+    "en-GB",
+    {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }
+  )}`;
 }

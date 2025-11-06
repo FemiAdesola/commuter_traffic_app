@@ -76,9 +76,11 @@ button {
 }
 
 /* selecting specific inputs in sidebar to adjust width */
-#searchBtn, #customSelect, #stationInput {
- width: 90%; /* Slightly narrower for sidebar */
- outline: none;
+#searchBtn,
+#customSelect,
+#stationInput {
+  width: 90%; /* Slightly narrower for sidebar */
+  outline: none;
 }
 
 /* Button base */
