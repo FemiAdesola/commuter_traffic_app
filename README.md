@@ -243,3 +243,14 @@ Example endpoints used:
 **API Data Source:** [Digitraffic Railway API](https://rata.digitraffic.fi)  
 
 ---
+
+## Self assessment and reflection
+> The creation of the Train Live Timetables Dashboard was both a challenge and a fulfillment of my desire. The main focus was to provide a modern, web-based interface that can present up-to-date train information from Finland's Digitraffic API in an attractive and user-friendly way.
+
+> This project had one critical learning point: the implementation of AJAX, or Asynchronous JavaScript and XML, which will fetch data from the server without having to reload the page. The application will be able to update the train schedules and statuses dynamically without interrupting the user's experience. Understanding how to properly utilise AJAX calls, how to handle responses, parse JSON data, and update DOM elements began to significantly improve my knowledge of asynchronous programming and web interactivity. 
+
+> The need to keep the layout clean and responsive, handling real-time API responses, forced me to plan my JavaScript functions and event listeners with much care. Equally, I grew my understanding of designing for performance and usability to ensure the dashboard feels smooth and efficient, even when there is constant data being updated.
+
+> On the design side, I enjoyed implementing a dark theme the most. Transitioning from bright to a more serious navy-blue and violet palette made this dashboard a sleek, professional tool. Adding gradients, subtle shadows, and hover effects enhanced the visual look of it and helped guide the users through the interface without distractions.
+
+> I feel a sense of fulfillment with the project because it balanced technical performance with aesthetics. It does not only present an ability to use live data but also shows how mindful design can enhance user experience. This experience strengthened my skills in front-end development, API integration, and UI/UX design, preparing me well for future interactive web projects.
