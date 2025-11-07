@@ -26,6 +26,7 @@ const pastTrainsDiv = document.getElementById("pastTrains");
 const customSelect = document.getElementById("customSelect");
 const selected = customSelect.querySelector(".selected");
 const optionsContainer = document.getElementById("stationOptions");
+const themeToggleBtn = document.getElementById("themeToggleBtn");
 
 // ================================
 //  DEFINE VARIABLES
@@ -39,6 +40,31 @@ let refreshInterval;
 
 // Used to remember whether past trains are being shown or hidden.
 let showAllPast = false;
+
+// ================================
+// THEME TOGGLE LOGIC
+// ================================
+
+// Load saved theme preference
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "light") {
+  document.body.classList.add("light-theme");
+  themeToggleBtn.textContent = "☀️";
+} else {
+  themeToggleBtn.textContent = "🌙";
+}
+
+// Toggle theme on click
+themeToggleBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+
+  const isLight = document.body.classList.contains("light-theme");
+  themeToggleBtn.textContent = isLight ? "☀️" : "🌙";
+
+  // Save preference
+  localStorage.setItem("theme", isLight ? "light" : "dark");
+});
+
 
 // ================================
 //  INITIAL SETUP (runs on page load)

@@ -46,6 +46,7 @@ It allows users to:
 - Track on-time and delayed trains.
 - Toggle between current and past trains.
 - Enjoy smooth animations and a clean, responsive UI.
+- Toggle between light and dark theme
 
 ---
 
@@ -56,7 +57,8 @@ It allows users to:
 ✅ **Smart Filtering** — Only shows trains within a 4-hour time frame.  
 ✅ **Auto Refresh** — Updates data every 45 seconds automatically.  
 ✅ **Responsive Design** — Works seamlessly on desktops, tablets, and mobile devices.  
-✅ **Interactive UI** — Dropdown search, hover effects, and animated cards.
+✅ **Interactive UI** — Dropdown search, hover effects, and animated cards. \
+✅ **Persistent theme toggle** — Remembers the dark/light preference. 
 
 ### **Auto Refresh** — Updates data every 45 seconds automatically
 > The app refreshes train information every 45 seconds to keep the data accurate and up to date. It uses a JavaScript feature called setInterval() to repeatedly call the fetchTrainData() method for the selected station, updating arrival and departure in real time, without requiring a manual page reload. This makes checking train schedules easy and seamless.
@@ -170,6 +172,8 @@ commuter_traffic_app/
 │   └── styles.css      # Stylesheet (main CSS file that defines the visual styling of the web application)
 ├── img/                # Contains image assets used in the application.
 │   ├── Dropdown.png
+│   ├── FrontDark.png
+│   ├── FrontLight.png
 │   ├── FrontPage.png
 │   ├── LiveTrain.png
 │   ├── MobileView.png
@@ -206,6 +210,17 @@ Example endpoints used:
 ```js
   https://rata.digitraffic.fi/api/v1/live-trains/station/{STATION_CODE}?arriving_trains=20&departing_trains=20&include_nonstopping=false
 ```
+
+---
+
+## Dark and Light Theme
++ Toggling Theme
+   - Click the **🌙 / ☀️** icon in the header  to switch themes.
+   - The preference is saved automatically.
+
+| Dark Theme | Light Theme |
+|-------------|--------------|
+| ![Dark mode](/img/FrontDark.png) | ![Light mode](/img/FrontLight.png) |
 
 ---
 

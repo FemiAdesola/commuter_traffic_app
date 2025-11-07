@@ -10,8 +10,8 @@
     <title>Train Live Timetables</title>
 
     <!-- favicons in a special local -->
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+
     <!-- External stylesheet for layout and design -->
     <link rel="stylesheet" href="./assets/styles.css" />
   </head>
@@ -27,6 +27,14 @@
            Handles station search and status display.
       =============================== -->
       <aside class="sidebar">
+        <!-- Theme toggle -->
+        <!-- <div class="theme-toggle">
+          <button id="themeToggleBtn">🌙 Dark Mode</button>
+        </div> -->
+
+    
+          <button class="theme-toggle" id="themeToggleBtn">🌙 Dark Mode</button>
+      
         <h2>Live Train Dashboard</h2>
 
         <!-- Current system time (auto-updated by JS) -->
@@ -73,7 +81,9 @@
 
         <!-- Past train section (toggle visibility) -->
         <div id="past-section" class="hidden">
-          <button id="togglePastBtn" class="toggle-btn">Show Past Trains</button>
+          <button id="togglePastBtn" class="toggle-btn">
+            Show Past Trains
+          </button>
           <!-- Cards for departed trains generated dynamically -->
           <div id="pastTrains" class="hidden"></div>
         </div>
