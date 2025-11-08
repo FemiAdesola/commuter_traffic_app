@@ -236,6 +236,19 @@ Example endpoints used:
 | Delays not updating | Refresh manually (click “Search” again). |
 
 ---
+
+## Steps to Add the GitHub Actions Badge (commuter_traffic)
+### Step 1: Create a GitHub Actions Workflow
++ In your project, create to:
+  * .github/workflows/
++ Create a new file (if not already present):
+  * commuter_traffic.yml
+- Add the GitHub Pages deployment workflow — for example:\
+[commuter_traffic.yml](.github/workflows/commuter_traffic.yml)
+
+- Commit and push the new workflow file
+---
+
 ## Future Enhancements
 - Add Finnish/English language switch.  
 - Deploy as PWA for mobile offline access.  
