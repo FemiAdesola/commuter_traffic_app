@@ -1,5 +1,8 @@
 # 🚆 Commuter Traffic App
 
+[![Commuter_Traffic_App](https://github.com/FemiAdesola/commuter_traffic_app/actions/workflows/commuter_traffic.yml/badge.svg?branch=main)](https://github.com/FemiAdesola/commuter_traffic_app/actions)
+
+
 > This is JavaScript + API project that demonstrates skills with AJAX, the Fetch API, and DOM manipulation without relying on frameworks
 
 ## 🚆 Project Goal

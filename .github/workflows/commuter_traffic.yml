@@ -1,33 +1,33 @@
-# name: commuter_traffic App 
+name: commuter_traffic App 
 
-# on:
-#   push:
-#     branches: [ main ]
-#   workflow_dispatch:
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-# permissions:
-#   contents: read
-#   pages: write
-#   id-token: write
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-# concurrency:
-#   group: "pages"
-#   cancel-in-progress: true
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
     
-#     environment:
-#       name: github-pages
-#       url: ${{ steps.deploy.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
 
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Upload static files
-#         uses: actions/upload-pages-artifact@v3
-#         with:
-#           path: .
-#       - name: commuter_traffic
-#         id: deploy
-#         uses: actions/deploy-pages@v4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: commuter_traffic
+        id: deploy
+        uses: actions/deploy-pages@v4
