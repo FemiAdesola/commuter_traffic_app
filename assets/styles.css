@@ -4,12 +4,13 @@
 ========================================================== */
 
 body {
+  height: 100%;
   margin: 0; /* Remove default browser spacing */
   font-family: "Segoe UI", Tahoma, sans-serif; /* Clean modern font */
   background-color: #0e0e12; /* Deep dark background */
   color: #e0e0e5; /* Soft light gray for readability */
   line-height: 1.6; /* Comfortable text spacing */
-  font-size: 17px; /* Slightly larger for readability */
+    font-size: clamp(15px, 1.5vw, 17px); /* Slightly larger for readability */
 }
 
 /* ==========================================================
@@ -19,11 +20,18 @@ body {
 .dashboard {
   display: flex; /* Horizontal layout */
   min-height: 100vh; /* Fill entire viewport height */
+  flex-wrap: wrap; /* stack on small screens */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  align-items: flex-start;
 }
 
 /* Sidebar setup */
 .sidebar {
-  width: 300px; /* Fixed width column */
+  flex: 1 1 280px; /* flexible */
+  max-width: 320px;
   background: linear-gradient(
     180deg,
     #151520,
@@ -35,6 +43,8 @@ body {
   flex-direction: column; /* Stack child elements */
   gap: 20px; /* Space between sections */
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5); /* Soft edge shadow */
+  z-index: 30; /* above main area for dropdown clicks */
+  min-height: 100vh; /* Fill entire viewport height */
 }
 
 /* Sidebar title */
@@ -123,10 +133,13 @@ button:hover {
    Holds results and train listings.
 ========================================================== */
 .main-content {
-  flex: 1; /* Expand to fill remaining width */
+  flex: 3 1 600px; /* Expand to fill remaining width */
   background-color: #13131a; /* Deep dark gray background */
   padding: 30px;
-  overflow-y: auto; /* Allow scroll if needed */
+  border-radius: 12px;
+  overflow: auto;
+  min-width: 260px;
+  z-index: 10;
 }
 
 /* Section title */
@@ -148,6 +161,18 @@ button:hover {
 /* ==========================================================
    TRAIN INFORMATION CARDS
 ========================================================== */
+
+/* results area */
+#results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 6px 0;
+  max-height: 70vh;
+  scroll-snap-type: y proximity;
+}
+
 .train-card {
   background: #1b1b24;
   border-left: 4px solid #b882ff; /* Purple accent line */
@@ -158,6 +183,7 @@ button:hover {
   font-size: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
   position: relative;
+  scroll-snap-align: start;
 }
 
 /* Animated glow border */
@@ -220,6 +246,13 @@ button:hover {
   border-left: 4px solid #ff6b6b;
   box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
 }
+#pastTrains{
+   display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 40vh;
+  scroll-snap-type: y proximity;
+}
 
 #results p {
   text-align: center;
@@ -235,6 +268,7 @@ button:hover {
   position: relative;
   width: 100%;
   font-size: 1rem;
+  z-index: 999; /* ensure clickable above most layers */
 }
 
 /* Dropdown display field */
@@ -273,6 +307,8 @@ button:hover {
   overflow-y: auto;
   z-index: 50;
   animation: fadeIn 0.15s ease-in-out;
+ 
+  z-index: 1500; /* ensure on top */
 }
 
 /* ==========================================================
@@ -292,13 +328,21 @@ button:hover {
 /* ==========================================================
    DROPDOWN OPTION ITEMS
 ========================================================== */
-.custom-select .option {
+/* .custom-select .option {
   padding: 12px 14px;
   border-bottom: 1px solid #2d2d36;
   cursor: pointer;
   background-color: #1b1b24;
   color: #e0e0e5;
   transition: background-color 0.2s, color 0.2s, box-shadow 0.3s;
+} */
+
+
+
+.custom-select .option {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  cursor: pointer;
 }
 
 /* Hover highlight */
@@ -324,7 +368,7 @@ button:hover {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
@@ -459,25 +503,49 @@ body.light-theme .theme-toggle button:hover {
 /* ==========================================================
    RESPONSIVE BEHAVIOR (Mobile)
 ========================================================== */
-@media (max-width: 800px) {
+
+/* responsive breakpoints (habit-tracker style) */
+@media (max-width: 1024px) {
   .dashboard {
-    flex-direction: column; /* Stack vertically */
+    gap: 14px;
+    padding: 14px;
   }
-
   .sidebar {
-    width: 100%; /* Full width sidebar */
+    max-width: 100%;
+    min-height: 30vh; /* Fill entire viewport height */
   }
-
-  .main-content {
-    padding: 20px; /* Tighter layout */
-  }
-
-  /* Larger touch-friendly controls */
-  .custom-select .selected,
-  .custom-select .option,
-  input,
-  button {
+  button{
     font-size: 1.1rem;
     padding: 14px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    padding: 12px;
+  }
+  .sidebar {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    min-height: 30vh; /* Fill entire viewport height */
+  }
+  .main-content {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    padding: 18px;
+  }
+  input,
+  button,
+  .custom-select .selected,
+  .custom-select .option {
+    font-size: 1.05rem;
+    padding: 14px;
+  }
+  #results {
+    max-height: 60vh;
   }
 }
