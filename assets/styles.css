@@ -1,0 +1,551 @@
+/* ==========================================================
+   GENERAL PAGE STYLING
+   Base typography and color setup for consistent appearance.
+========================================================== */
+
+body {
+  height: 100%;
+  margin: 0; /* Remove default browser spacing */
+  font-family: "Segoe UI", Tahoma, sans-serif; /* Clean modern font */
+  background-color: #0e0e12; /* Deep dark background */
+  color: #e0e0e5; /* Soft light gray for readability */
+  line-height: 1.6; /* Comfortable text spacing */
+    font-size: clamp(15px, 1.5vw, 17px); /* Slightly larger for readability */
+}
+
+/* ==========================================================
+   DASHBOARD LAYOUT
+   Two-column structure: sidebar + main content area.
+========================================================== */
+.dashboard {
+  display: flex; /* Horizontal layout */
+  min-height: 100vh; /* Fill entire viewport height */
+  flex-wrap: wrap; /* stack on small screens */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  align-items: flex-start;
+}
+
+/* Sidebar setup */
+.sidebar {
+  flex: 1 1 280px; /* flexible */
+  max-width: 320px;
+  background: linear-gradient(
+    180deg,
+    #151520,
+    #0e0e12
+  ); /* Subtle gradient for depth */
+  color: #f4f4f8; /* Bright white text for readability */
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Stack child elements */
+  gap: 20px; /* Space between sections */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5); /* Soft edge shadow */
+  z-index: 30; /* above main area for dropdown clicks */
+  min-height: 100vh; /* Fill entire viewport height */
+}
+
+/* Sidebar title */
+.sidebar h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #b882ff; /* Purple accent */
+}
+
+/* Sidebar clock display */
+.time {
+  text-align: center;
+  color: #9a9aa5;
+  font-weight: 500;
+}
+
+/* Search label styling */
+.search-area label {
+  color: #f4f4f8;
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* ==========================================================
+   FORM CONTROLS (Inputs & Buttons)
+========================================================== */
+input,
+button {
+  width: 100%; /* Full width for clean alignment */
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box; /* Include padding in total width */
+  margin: 10px 0;
+  background-color: #1b1b24; /* Dark input background */
+  color: #e0e0e5; /* Text readable on dark */
+}
+
+/* selecting specific inputs in sidebar to adjust width */
+#searchBtn,
+#customSelect,
+#stationInput {
+  width: 90%; /* Slightly narrower for sidebar */
+  outline: none;
+}
+
+/* Button base */
+button {
+  background: linear-gradient(
+    90deg,
+    #6004eb,
+    #e08f0e
+  ); /* Purple to gold gradient */
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(169, 113, 255, 0.4); /* Subtle glow */
+  border: 1px solid rgba(169, 113, 255, 0.5);
+}
+
+/* Button hover feedback */
+button:hover {
+  background: linear-gradient(90deg, #ffba49, #a971ff);
+  box-shadow: 0 0 3px rgba(255, 186, 73, 0.7), 0 0 5px rgba(169, 113, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================
+   ERROR MESSAGE BOX
+========================================================== */
+.error {
+  color: #ff6b6b;
+  background: #2a1515;
+  padding: 8px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+/* ==========================================================
+   MAIN CONTENT AREA
+   Holds results and train listings.
+========================================================== */
+.main-content {
+  flex: 3 1 600px; /* Expand to fill remaining width */
+  background-color: #13131a; /* Deep dark gray background */
+  padding: 30px;
+  border-radius: 12px;
+  overflow: auto;
+  min-width: 260px;
+  z-index: 10;
+}
+
+/* Section title */
+.main-content h1 {
+  text-align: center;
+  color: #b882ff; /* Vibrant purple highlight */
+  font-size: 1.8rem;
+}
+
+/* Current time range info */
+.time-range {
+  text-align: center;
+  color: #ffba49; /* Gold accent for active states */
+  font-weight: 500;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 186, 73, 0.6);
+}
+
+/* ==========================================================
+   TRAIN INFORMATION CARDS
+========================================================== */
+
+/* results area */
+#results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 6px 0;
+  max-height: 70vh;
+  scroll-snap-type: y proximity;
+}
+
+/* Individual train card */
+.train-card {
+  background: #1b1b24;
+  border-left: 4px solid #b882ff; /* Purple accent line */
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(184, 130, 255, 0.2); /* Glow edge */
+  font-size: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+/* Animated glow border */
+.train-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  padding: 2px;
+
+  /* Gradient border effect */
+  background: linear-gradient(90deg, #b882ff, #ffba49, #b882ff);
+  background-size: 200% 200%;
+  animation: neonGlow 4s linear infinite;
+
+  /* for creating hollow border effect without -webkit-mask */
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude; /* Subtract inner area from border */
+
+  /* to ensure that background doesn’t overlay card content */
+  background-clip: content-box, border-box;
+  pointer-events: none; /* Prevent interfering with interactions */
+}
+
+/* Hover lift + enhanced glow */
+.train-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(255, 186, 73, 0.5),
+    0 0 12px rgba(184, 130, 255, 0.4);
+  border-left-color: #ffba49;
+}
+
+/* Train name/emphasis text */
+.train-card strong {
+  color: #ffffff;
+}
+
+/* Train status indicators */
+.train-card .on-time {
+  color: #8aff8a; /* Soft neon green */
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(138, 255, 138, 0.6);
+}
+.train-card .delayed {
+  color: #ff6b6b; /* Bright red */
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(255, 107, 107, 0.6);
+}
+
+/* Destination link styling */
+.destination-link {
+  color: #1b3ed7;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, text-shadow 0.3s;
+}
+
+/* Past trains (already departed) */
+.past-train {
+  background-color: #5c3535;
+  border-left: 4px solid #ff6b6b;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+/* Past trains container */
+#pastTrains{
+   display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 40vh;
+  scroll-snap-type: y proximity;
+}
+
+#results p {
+  text-align: center;
+  color: #ff6b6b;
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+/* ==========================================================
+   CUSTOM DROPDOWN COMPONENT
+   Replaces default select with styled version.
+========================================================== */
+.custom-select {
+  position: relative;
+  width: 100%;
+  font-size: 1rem;
+  z-index: 999; /* ensure clickable above most layers */
+}
+
+/* Dropdown display field */
+.custom-select .selected {
+  padding: 12px 14px;
+  background-color: #1b1b24;
+  color: #e0e0e5;
+  border-radius: 6px;
+  border: 1px solid #2d2d36;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.3s;
+}
+
+/* Hover visual feedback */
+.custom-select .selected:hover {
+  background-color: #252531;
+  border-color: #b882ff;
+  box-shadow: 0 0 10px rgba(184, 130, 255, 0.5);
+}
+
+/* Dropdown list container */
+.custom-select .options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: #1b1b24;
+  color: #e0e0e5;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(184, 130, 255, 0.3);
+  border: 1px solid #2d2d36;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 50;
+  animation: fadeIn 0.15s ease-in-out;
+ 
+  z-index: 1500; /* ensure on top */
+}
+
+/* ==========================================================
+   CUSTOM SCROLLBAR
+========================================================== */
+/* Scrollbar styling for dropdown options */
+.custom-select .options::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-select .options::-webkit-scrollbar-thumb {
+  background-color: #3c3c46;
+  border-radius: 4px;
+}
+.custom-select .options::-webkit-scrollbar-thumb:hover {
+  background-color: #b882ff;
+}
+
+/* ==========================================================
+   DROPDOWN OPTION ITEMS
+========================================================== */
+.custom-select .option {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+}
+
+/* Hover highlight */
+.custom-select .option:hover {
+  background-color: #b882ff;
+  color: #0e0e12;
+  box-shadow: 0 0 10px rgba(184, 130, 255, 0.5);
+}
+
+/* Remove divider on last item */
+.custom-select .option:last-child {
+  border-bottom: none;
+}
+
+/* Utility: hide element */
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================
+   ANIMATION EFFECTS
+========================================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated gradient for glowing borders */
+@keyframes neonGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ==========================================================
+   ENHANCED LIGHT THEME
+========================================================== */
+body.light-theme {
+  background-color: #f4f5fa;
+  color: #222;
+}
+
+/* Sidebar adjustments for light theme */
+body.light-theme .sidebar {
+  background: linear-gradient(180deg, #3b3a3a, #5d5d5f);
+  color: #1e1e2a;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .sidebar h2 {
+  color: #8a5cff; /* Softer purple */
+}
+
+/* Input and dropdown adjustments */
+body.light-theme input,
+body.light-theme .custom-select .selected,
+body.light-theme .custom-select .options,
+body.light-theme .custom-select .option {
+  background-color: #ffffff;
+  color: #222;
+  border: 1px solid #d0d0d5;
+}
+
+body.light-theme .custom-select .option:hover {
+  background-color: #e7e1ff;
+  color: #1e1e2a;
+}
+
+body.light-theme button {
+  background: linear-gradient(90deg, #4e4d4e, #15120e6a);
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid rgba(106, 104, 111, 0.5);
+  box-shadow: 0 2px 6px rgba(32, 32, 33, 0.3);
+  transition: all 0.3s ease;
+}
+
+body.light-theme button:hover {
+  background: linear-gradient(90deg, #15120e6a, #4e4d4e);
+  transform: translateY(-2px);
+}
+
+body.light-theme .main-content {
+  background-color: #fafafa;
+  color: #222;
+}
+
+body.light-theme .main-content h1 {
+  color: #8a5cff;
+}
+
+body.light-theme .time-range {
+  color: #ff9b2f;
+  text-shadow: none;
+}
+
+body.light-theme .train-card {
+  background: #ffffff;
+  border-left: 4px solid #8a5cff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .train-card:hover {
+  border-left-color: #ffb85c;
+  box-shadow: 0 4px 10px rgba(255, 184, 92, 0.25);
+}
+
+body.light-theme .train-card strong {
+  color: #1e1e2a;
+}
+
+body.light-theme .past-train {
+  background-color: #fff0f0;
+  border-left: 4px solid #ff6b6b;
+  box-shadow: 0 0 6px rgba(255, 107, 107, 0.3);
+}
+
+body.light-theme .destination-link {
+  color: #294cff;
+  text-decoration: none;
+}
+
+body.light-theme .error {
+  background: #fff0f0;
+  color: #b00020;
+  border: 1px solid #ff6b6b;
+}
+
+body.light-theme .theme-toggle button {
+  background: #380ac2;
+  color: #6a46e3;
+  border: 1px solid #d3c8ff;
+  box-shadow: none;
+}
+
+/* ==========================================================
+   THEME TOGGLE BUTTON SPECIFIC STYLES
+========================================================== */
+#themeToggleBtn {
+  background: transparent;
+  box-shadow: none;
+  width: 30%;
+  border: 0.01rem solid #716f6f;
+}
+
+body.light-theme .theme-toggle button:hover {
+  background: #e6deff;
+  color: #4b2ecf;
+}
+
+/* ==========================================================
+   RESPONSIVE BEHAVIOR (Mobile)
+========================================================== */
+
+/* responsive breakpoints */
+@media (max-width: 1024px) {
+  .dashboard {
+    gap: 14px;
+    padding: 14px;
+  }
+  .sidebar {
+    max-width: 100%;
+    min-height: 30vh; /* Fill entire viewport height */
+  }
+  button{
+    font-size: 1.1rem;
+    padding: 14px;
+    width: 100%;
+  }
+}
+
+/* mobile layout adjustments */
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+    padding: 12px;
+  }
+  .sidebar {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    min-height: 30vh; /* Fill entire viewport height */
+  }
+  .main-content {
+    order: 1;
+    width: 100%;
+    max-width: none;
+    padding: 18px;
+  }
+  input,
+  button,
+  .custom-select .selected,
+  .custom-select .option {
+    font-size: 1.05rem;
+    padding: 14px;
+  }
+  #results {
+    max-height: 60vh;
+  }
+}
