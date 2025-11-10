@@ -1,6 +1,6 @@
 # ==========================================================
 # GitLab CI/CD pipeline for Train Live Timetables web app
-# Deploys directly from repo root (no public folder)
+# Deploys directly from repo root
 # ==========================================================
 
 stages:
@@ -44,20 +44,18 @@ test:
     - merge_requests
 
 # ------------------------------
-# 3️⃣ DEPLOY: Publish static site to GitLab Pages
-# Deploys directly from repo root
+# 3️⃣ DEPLOY: Publish static site to GitLab Pages from repo root
 # ------------------------------
 pages:
-  image: alpine
   stage: deploy
+  image: alpine:latest
   script:
-    - echo "🚀 Deploying Train Live Timetables app..."
-    # Copy all necessary files for GitLab Pages
-    - cp index.html .public/index.html
-    - cp -r assets .public/assets
-    - cp -r js .public/js
+    - mkdir -p public
+    - cp index.html public/
+    - cp -r assets public/
+    - cp -r js public/
   artifacts:
     paths:
-      - .public
+      - public
   only:
     - main
