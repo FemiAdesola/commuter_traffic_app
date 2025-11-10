@@ -1,10 +1,63 @@
-# The Docker image that will be used to build your app
-image: node:lts
-create-pages:
-  pages:
-    # The folder that contains the files to be exposed at the Page URL
-    publish: public
-  rules:
-    # This ensures that only pushes to the default branch will trigger
-    # a pages deploy
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+# ==========================================================
+# GitLab CI/CD pipeline for Train Live Timetables web app
+# Deploys directly from repo root (no public folder)
+# ==========================================================
+
+stages:
+  - lint
+  - test
+  - deploy
+
+# ------------------------------
+# 1️⃣ LINT: Check HTML, JS, and CSS quality
+# ------------------------------
+lint:
+  image: node:20
+  stage: lint
+  before_script:
+    - npm install -g htmlhint stylelint eslint
+  script:
+    - echo "🔍 Linting HTML..."
+    - htmlhint index.html || true
+    - echo "🔍 Linting CSS..."
+    - stylelint "**/*.css" || true
+    - echo "🔍 Linting JavaScript..."
+    - eslint js/*.js || true
+  allow_failure: true
+  only:
+    - main
+    - merge_requests
+
+# ------------------------------
+# 2️⃣ TEST: Run headless browser tests (optional)
+# ------------------------------
+test:
+  image: node:20
+  stage: test
+  before_script:
+    - npm install -g jest jsdom
+  script:
+    - echo "✅ Running frontend tests (if present)..."
+    - echo "No tests defined yet. Skipping..."
+  only:
+    - main
+    - merge_requests
+
+# ------------------------------
+# 3️⃣ DEPLOY: Publish static site to GitLab Pages
+# Deploys directly from repo root
+# ------------------------------
+pages:
+  image: alpine
+  stage: deploy
+  script:
+    - echo "🚀 Deploying Train Live Timetables app..."
+    # Copy all necessary files for GitLab Pages
+    - cp index.html .public/index.html
+    - cp -r assets .public/assets
+    - cp -r js .public/js
+  artifacts:
+    paths:
+      - .public
+  only:
+    - main
