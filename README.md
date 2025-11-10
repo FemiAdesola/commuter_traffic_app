@@ -21,7 +21,7 @@
 > This is dark-themed **real-time train timetable dashboard** built using **HTML**, **CSS**, and **JavaScript**.  
 It connects to the **Digitraffic Open API** to show **live arrival and departure information** for all train stations across Finland.
 
-<code style="color : greenyellow"><strong>Click to view the website link [here](https://femi-commuter-traffic-app.netlify.app/)</strong></code>
+<code style="color : greenyellow"><strong>Click to view the website link [here](https://femi-commuter-traffic-app.netlify.app/) and GitHub site [here](https://femiadesola.github.io/commuter_traffic_app) </strong></code>
 
 
 ---
