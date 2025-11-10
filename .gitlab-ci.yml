@@ -1,6 +1,6 @@
 # ==========================================================
 # GitLab CI/CD pipeline for Train Live Timetables web app
-# Deploys directly from repo root (no public folder)
+# Deploys directly from repo root
 # ==========================================================
 
 stages:
@@ -37,27 +37,24 @@ test:
   before_script:
     - npm install -g jest jsdom
   script:
-    - echo "Running frontend tests (if present)..."
+    - echo "✅ Running frontend tests (if present)..."
     - echo "No tests defined yet. Skipping..."
   only:
     - main
     - merge_requests
 
 # ------------------------------
-# 3️⃣ DEPLOY: Publish static site to GitLab Pages
-# Deploys directly from repo root
+# 3️⃣ DEPLOY: Publish static site to GitLab Pages from repo root
 # ------------------------------
 pages:
-  image: alpine
   stage: deploy
+  image: alpine:latest
   script:
     - echo "🚀 Deploying Train Live Timetables app..."
-    # Copy all necessary files for GitLab Pages
-    - cp index.html .public/index.html
-    - cp -r assets .public/assets
-    - cp -r js .public/js
   artifacts:
     paths:
-      - .public
+      - index.html
+      - assets
+      - js
   only:
     - main
