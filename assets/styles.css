@@ -173,6 +173,7 @@ button:hover {
   scroll-snap-type: y proximity;
 }
 
+/* Individual train card */
 .train-card {
   background: #1b1b24;
   border-left: 4px solid #b882ff; /* Purple accent line */
@@ -233,6 +234,7 @@ button:hover {
   text-shadow: 0 0 2px rgba(255, 107, 107, 0.6);
 }
 
+/* Destination link styling */
 .destination-link {
   color: #1b3ed7;
   text-decoration: none;
@@ -246,6 +248,8 @@ button:hover {
   border-left: 4px solid #ff6b6b;
   box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
 }
+
+/* Past trains container */
 #pastTrains{
    display: flex;
   flex-direction: column;
@@ -314,6 +318,7 @@ button:hover {
 /* ==========================================================
    CUSTOM SCROLLBAR
 ========================================================== */
+/* Scrollbar styling for dropdown options */
 .custom-select .options::-webkit-scrollbar {
   width: 8px;
 }
@@ -328,17 +333,6 @@ button:hover {
 /* ==========================================================
    DROPDOWN OPTION ITEMS
 ========================================================== */
-/* .custom-select .option {
-  padding: 12px 14px;
-  border-bottom: 1px solid #2d2d36;
-  cursor: pointer;
-  background-color: #1b1b24;
-  color: #e0e0e5;
-  transition: background-color 0.2s, color 0.2s, box-shadow 0.3s;
-} */
-
-
-
 .custom-select .option {
   padding: 10px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.02);
@@ -397,6 +391,7 @@ body.light-theme {
   color: #222;
 }
 
+/* Sidebar adjustments for light theme */
 body.light-theme .sidebar {
   background: linear-gradient(180deg, #3b3a3a, #5d5d5f);
   color: #1e1e2a;
@@ -407,6 +402,7 @@ body.light-theme .sidebar h2 {
   color: #8a5cff; /* Softer purple */
 }
 
+/* Input and dropdown adjustments */
 body.light-theme input,
 body.light-theme .custom-select .selected,
 body.light-theme .custom-select .options,
@@ -488,6 +484,9 @@ body.light-theme .theme-toggle button {
   box-shadow: none;
 }
 
+/* ==========================================================
+   THEME TOGGLE BUTTON SPECIFIC STYLES
+========================================================== */
 #themeToggleBtn {
   background: transparent;
   box-shadow: none;
@@ -504,7 +503,7 @@ body.light-theme .theme-toggle button:hover {
    RESPONSIVE BEHAVIOR (Mobile)
 ========================================================== */
 
-/* responsive breakpoints (habit-tracker style) */
+/* responsive breakpoints */
 @media (max-width: 1024px) {
   .dashboard {
     gap: 14px;
@@ -521,6 +520,7 @@ body.light-theme .theme-toggle button:hover {
   }
 }
 
+/* mobile layout adjustments */
 @media (max-width: 768px) {
   .dashboard {
     flex-direction: column;
