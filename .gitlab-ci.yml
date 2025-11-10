@@ -37,7 +37,7 @@ test:
   before_script:
     - npm install -g jest jsdom
   script:
-    - echo "✅ Running frontend tests (if present)..."
+    - echo "Running frontend tests (if present)..."
     - echo "No tests defined yet. Skipping..."
   only:
     - main
