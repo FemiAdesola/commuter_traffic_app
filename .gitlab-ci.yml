@@ -37,7 +37,7 @@ test:
   before_script:
     - npm install -g jest jsdom
   script:
-    - echo "✅ Running frontend tests (if present)..."
+    - echo "Running frontend tests (if present)..."
     - echo "No tests defined yet. Skipping..."
   only:
     - main
@@ -50,11 +50,12 @@ pages:
   stage: deploy
   image: alpine:latest
   script:
-    - echo "🚀 Deploying Train Live Timetables app..."
+    - mkdir -p public
+    - cp index.html public/
+    - cp -r assets public/
+    - cp -r js public/
   artifacts:
     paths:
-      - index.html
-      - assets
-      - js
+      - public
   only:
     - main
