@@ -178,6 +178,7 @@ commuter_traffic_app/
 │   ├── FrontDark.png
 │   ├── FrontLight.png
 │   ├── FrontPage.png
+│   ├── GitHub.png
 │   ├── LiveTrain.png
 │   ├── MobileView.png
 │   ├── Not-Found.png
@@ -247,6 +248,34 @@ Example endpoints used:
 [commuter_traffic.yml](.github/workflows/commuter_traffic.yml)
 
 - Commit and push the new workflow file
+---
+
+### Step 2: Add Badge to README.md
+- Open README.md file and paste the markdown snippet at the top (usually below the project title).
+  * Example
+```markdown
+  # Commuter Traffic CI/CD
+
+[![Habit_Tracker](https://github.com/FemiAdesola/commuter_traffic_app/actions/workflows/commuter_traffic.yml/badge.svg?branch=main)](https://github.com/FemiAdesola/commuter_traffic_app/actions)
+
+```
+
+### Step 3: Check the Actions on GitHub
+- On GitHub open the repository
+  * go to Actions then 
+  * Click on Commuter Traffic CI/CD
+
+### Step 4: Verify the Badge
+- Push your updated README to GitHub.
+- Open your repository’s main page.
+- The badge should now appear — showing:
+  * ✅ Passing (green) when the workflow succeeds.
+  * ❌ Failing (red) if the workflow encounters an error.
+
++ Result from GitHub 
+
+![GitHub](/img/GitHub.png)
+
 ---
 
 ## Future Enhancements
