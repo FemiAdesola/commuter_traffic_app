@@ -12,9 +12,20 @@
     - Fetch live train timetable data from the Digitraffic API
     - Display upcoming arrival, departures, destinations, and delays
     - Show loading/error states for better UX
+    - Using JQuery 
 
 ---
 
+> This project includes both Vanilla JavaScript and jQuery versions.
+To use the Vanilla JavaScript version, include this script in your HTML, before closing body tag:
+```html
+<script src="./js/app.js"></script>
+```
+
+To use the jQuery version, switch to:
+```html
+<script src="./js/appJQuery.js"></script>
+```
 
 # 🚆 Documentation for Train Live Timetables Web App
 
@@ -227,6 +238,44 @@ Example endpoints used:
 | ![Dark mode](/img/FrontDark.png) | ![Light mode](/img/FrontLight.png) |
 
 ---
+
+## jQuery Version
+
+This project includes a jQuery-powered version of the Train Live Tracker app.  
+jQuery is a lightweight JavaScript library that makes it easier to work with:
+
+- DOM elements (`$("#id")`, `.addClass()`, `.text()`)
+- Event listeners (`.on("click", ...)`)
+- AJAX requests (`fetch()` but can also use `$.ajax`)
+- Animations and UI effects
+
+### Why jQuery?
+
+Although modern JavaScript can do most things natively, jQuery still offers:
+
+- Shorter and more readable code
+- Simple cross-browser compatibility
+- Clean event handling
+- Fast DOM manipulation
+
+In this project, jQuery is used for:
+
+- Handling button clicks and input events
+- Managing the custom station dropdown
+- Updating the results list in real-time
+- Toggling themes and UI sections
+- Building HTML elements dynamically for each train
+
+### How to Use
+
+Include jQuery **before** the app script:
+
+```html
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="app-jquery.js"></script>
+```
+
+
 
 ## Troubleshooting
 
