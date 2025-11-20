@@ -336,6 +336,11 @@ Include jQuery **before** the app script:
 **Developed by:** Femi Adesola\
 **API Data Source:** [Digitraffic Railway API](https://rata.digitraffic.fi)  
 
+## 🧾 License
+
+MIT License [Femi Adesola Oyinloye](https://github.com/FemiAdesola) © 2025 
+
+Feel free to fork, modify, and share!
 ---
 
 ## Self assessment and reflection
